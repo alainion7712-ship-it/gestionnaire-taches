@@ -25,7 +25,7 @@ def afficher(taches):
 def main():
     taches = charger()
     while True:
-        print("\n1) Voir  2) Ajouter  3) Terminer  4) Quitter")
+        print("\n1) Voir  2) Ajouter  3) Terminer  4) Quitter  5) Supprimer")
         choix = input("Choix : ").strip()
         if choix == "1":
             afficher(taches)
@@ -42,6 +42,17 @@ def main():
                     raise IndexError
                 taches[n - 1]["faite"] = True
                 sauvegarder(taches)
+            except (ValueError, IndexError):
+                print("Numéro invalide.")
+        elif choix == "5":
+            afficher(taches)
+            try:
+                n = int(input("Numéro à supprimer : "))
+                if n < 1:
+                    raise IndexError
+                supprimee = taches.pop(n - 1)
+                sauvegarder(taches)
+                print(f"Supprimé : {supprimee['titre']}")
             except (ValueError, IndexError):
                 print("Numéro invalide.")
         elif choix == "4":
